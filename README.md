@@ -2,6 +2,8 @@
 
 An Model Context Protocol (MCP) server for managing SearXNG instances, configuration settings, search engine states, API health checking, and container lifecycle.
 
+This repository is part of the **TheNovaNodes Antigravity Agent Ecosystem**. It provides standard MCP tools to interface securely and reliably with SearXNG, empowering ecosystem agents to inspect settings, toggle search engines dynamically, and monitor service health.
+
 ## Features
 
 - **Inspect Settings**: Read and parse SearXNG configuration settings (`settings.yml`), listing active/disabled engines and configuration parameters.
@@ -33,6 +35,10 @@ pip install -e .
 - `set_engine_status`: Set explicit enabled/disabled state for a search engine in `settings.yml`.
 - `test_search_api_health`: Perform a health check query against the SearXNG search endpoint.
 - `restart_searxng_container`: Restart the SearXNG Docker container via subprocess.
+
+## Ecosystem Context
+
+As a part of the TheNovaNodes ecosystem, this project adheres to high-quality standards and ensures robustness for integrations with other Antigravity agents.
 
 ## License
 
