@@ -11,7 +11,7 @@ except ImportError:
     from mcp.server.mcpserver import MCPServer as FastMCP
 
 DEFAULT_SETTINGS_PATH = os.environ.get(
-    "SEARXNG_SETTINGS_PATH", "/home/ddoctorm/services/searxng/settings.yml"
+    "SEARXNG_SETTINGS_PATH", "/config/settings.yml"
 )
 DEFAULT_SEARXNG_URL = os.environ.get(
     "SEARXNG_URL", "http://localhost:8081"
