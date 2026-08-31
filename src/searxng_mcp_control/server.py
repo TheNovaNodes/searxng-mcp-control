@@ -6,6 +6,12 @@ import httpx
 import yaml
 
 try:
+    from yaml import CSafeLoader as YamlSafeLoader, CSafeDumper as YamlSafeDumper
+except ImportError:
+    from yaml import SafeLoader as YamlSafeLoader, SafeDumper as YamlSafeDumper
+
+
+try:
     from mcp.server.fastmcp import FastMCP
 except ImportError:
     from mcp.server.mcpserver import MCPServer as FastMCP
@@ -40,7 +46,7 @@ def inspect_settings(settings_path: Optional[str] = None) -> Dict[str, Any]:
 
     try:
         with open(path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f) or {}
+            data = yaml.load(f, Loader=YamlSafeLoader) or {}
 
         engines = data.get("engines", [])
         enabled_engines = []
@@ -100,7 +106,7 @@ def set_engine_status(
 
     try:
         with open(path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f) or {}
+            data = yaml.load(f, Loader=YamlSafeLoader) or {}
 
         engines = data.get("engines", [])
         updated = False
@@ -117,7 +123,7 @@ def set_engine_status(
             data["engines"] = engines
 
         with open(path, "w", encoding="utf-8") as f:
-            yaml.safe_dump(data, f, sort_keys=False, default_flow_style=False)
+            yaml.dump(data, f, Dumper=YamlSafeDumper, sort_keys=False, default_flow_style=False)
 
         status_str = "enabled" if enabled else "disabled"
         return {

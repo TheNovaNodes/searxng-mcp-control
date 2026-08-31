@@ -1,0 +1,3 @@
+## 2024-08-31 - Optimize PyYAML Performance with C-Extensions
+**Learning:** PyYAML's `yaml.safe_load` and `yaml.safe_dump` are convenient but very slow on large files. For a SearXNG `settings.yml` file, `CSafeLoader` provides a ~7.9x speedup (13.78s down to 1.74s for 50 parses), and `CSafeDumper` provides a ~4.3x speedup. Since not all environments have the libyaml C extension installed, we must try-catch the import and fallback to `SafeLoader`/`SafeDumper`.
+**Action:** Always prefer `yaml.load(..., Loader=CSafeLoader)` with a fallback over `yaml.safe_load()` in Python tools that read/write large YAML configurations frequently, like control plane servers.
