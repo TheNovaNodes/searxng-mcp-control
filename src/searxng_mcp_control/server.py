@@ -54,12 +54,19 @@ def inspect_settings(settings_path: Optional[str] = None) -> Dict[str, Any]:
             else:
                 enabled_engines.append(name)
 
+
+        server_data = data.get("server", {})
+        if isinstance(server_data, dict) and "secret_key" in server_data:
+            server_data = server_data.copy()
+            server_data["secret_key"] = "***REDACTED***"
+
         return {
             "success": True,
             "settings_path": path,
             "general": data.get("general", {}),
-            "server": data.get("server", {}),
+            "server": server_data,
             "search": data.get("search", {}),
+
             "outgoing": data.get("outgoing", {}),
             "use_default_settings": data.get("use_default_settings", True),
             "engine_summary": {

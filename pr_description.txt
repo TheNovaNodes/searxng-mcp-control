@@ -1,0 +1,7 @@
+🛡️ Sentinel: [CRITICAL] Fix secret_key exposure in inspect_settings
+
+🚨 Severity: CRITICAL
+💡 Vulnerability: The `inspect_settings` MCP endpoint returned the full parsed settings dictionary, exposing the `secret_key` in plaintext.
+🎯 Impact: An attacker or unauthorized agent could read the server's `secret_key`, potentially allowing them to forge sessions or bypass security controls.
+🔧 Fix: Updated `inspect_settings` to actively redact the `secret_key` from the `server` dictionary configuration before returning it to the caller.
+✅ Verification: Ensure the test suite passes, including the updated assertion that checks that the `secret_key` is `"***REDACTED***"`.

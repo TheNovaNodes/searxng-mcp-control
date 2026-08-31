@@ -84,6 +84,7 @@ class TestInspectSettings:
         assert res["general"]["instance_name"] == "SearXNG Test Engine"
         assert res["server"]["limiter"] is False
         assert res["search"]["formats"] == ["html", "json"]
+        assert res["server"]["secret_key"] == "***REDACTED***"
         assert res["outgoing"]["request_timeout"] == 2.0
 
         summary = res["engine_summary"]
